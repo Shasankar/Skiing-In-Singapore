@@ -16,7 +16,7 @@ public class RunSisg {
 			for(int i=0; i<height; i++){
 				String[] elevations = br.readLine().split(" ");
 				for(int j=0; j<width; j++){
-					grid[i][j] = new MountnPoint(Integer.parseInt(elevations[j]),i,j);
+					grid[i][j] = new MountnPoint(Integer.parseInt(elevations[j]));
 				}
 			}
 			for(int i=0; i<height; i++){
