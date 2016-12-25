@@ -22,23 +22,40 @@ public class RunSisg {
 			for(int i=0; i<height; i++){
 				for(int j=0; j<width; j++){
 					//North
-					if(i>0 && grid[i-1][j].getElevation()<grid[i][j].getElevation())
-						grid[i][j].addNeighbours(grid[i-1][j]);
+					if(i>0){
+						if(grid[i-1][j].getElevation()<grid[i][j].getElevation())
+							grid[i][j].addNeighbours(grid[i-1][j]);
+						if(grid[i-1][j].getElevation()>grid[i][j].getElevation())
+							grid[i][j].setStartPoint(false);
+					}
 					//South
-					if(i<height-1 && grid[i+1][j].getElevation()<grid[i][j].getElevation())
-						grid[i][j].addNeighbours(grid[i+1][j]);
+					if(i<height-1){
+						if(grid[i+1][j].getElevation()<grid[i][j].getElevation())
+							grid[i][j].addNeighbours(grid[i+1][j]);
+						if(grid[i+1][j].getElevation()>grid[i][j].getElevation())
+							grid[i][j].setStartPoint(false);
+					}
 					//East
-					if(j<width-1 && grid[i][j+1].getElevation()<grid[i][j].getElevation())
-						grid[i][j].addNeighbours(grid[i][j+1]);
+					if(j<width-1){
+						if(grid[i][j+1].getElevation()<grid[i][j].getElevation())
+							grid[i][j].addNeighbours(grid[i][j+1]);
+						if(grid[i][j+1].getElevation()>grid[i][j].getElevation())
+							grid[i][j].setStartPoint(false);
+					}
 					//West
-					if(j>0 && grid[i][j-1].getElevation()<grid[i][j].getElevation())
-						grid[i][j].addNeighbours(grid[i][j-1]);
+					if(j>0){
+						if(grid[i][j-1].getElevation()<grid[i][j].getElevation())
+							grid[i][j].addNeighbours(grid[i][j-1]);
+						if(grid[i][j-1].getElevation()>grid[i][j].getElevation())
+							grid[i][j].setStartPoint(false);
+					}
 				}
 			}
 			ArrayList<ArrayList<Integer>> paths = new ArrayList<ArrayList<Integer>>();
 			for(int i=0; i<height; i++){
 				for(int j=0; j<width; j++){
-					 grid[i][j].traverse(paths,new ArrayList<Integer>());
+					if(grid[i][j].getStartPoint())
+						grid[i][j].traverse(paths,new ArrayList<Integer>());
 				}
 			}
 			int maxLength = 0;
